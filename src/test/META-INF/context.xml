@@ -1,0 +1,12 @@
+<Context>
+  <Resource name="jdbc/bdp"
+            auth="Container"
+            type="javax.sql.DataSource"
+            driverClassName="com.ibm.db2.jcc.DB2Driver"
+            url="jdbc:db2://localhost:50000/bdp"
+            username="bdp"
+            password="123456"
+            maxActive="100"
+            maxIdle="30"
+            maxWait="10000" />
+</Context>

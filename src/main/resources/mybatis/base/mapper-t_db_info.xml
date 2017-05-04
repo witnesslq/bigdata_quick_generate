@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dbInfoDAO">
+  <resultMap id="dbInfo" type="com.tlcb.bdp.model.DbInfo">
+    <result property="dbAlias" column="DB_ALIAS" />
+    <result property="dbDesc" column="DB_DESC" />
+    <result property="dbId" column="DB_ID" />
+    <result property="dbIp" column="DB_IP" />
+    <result property="dbName" column="DB_NAME" />
+    <result property="dbPassword" column="DB_PASSWORD" />
+    <result property="dbSchema" column="DB_SCHEMA" />
+    <result property="dbStatus" column="DB_STATUS" />
+    <result property="dbType" column="DB_TYPE" />
+    <result property="dbUser" column="DB_USER" />
+  </resultMap>
+
+  <sql id="sql_insert_column_list">
+    <trim prefix="" prefixOverrides=",">
+      <if test="entity.dbAlias != null and entity.dbAlias != ''">,DB_ALIAS</if>
+      <if test="entity.dbDesc != null and entity.dbDesc != ''">,DB_DESC</if>
+      <if test="entity.dbId != null and entity.dbId != ''">,DB_ID</if>
+      <if test="entity.dbIp != null and entity.dbIp != ''">,DB_IP</if>
+      <if test="entity.dbName != null and entity.dbName != ''">,DB_NAME</if>
+      <if test="entity.dbPassword != null and entity.dbPassword != ''">,DB_PASSWORD</if>
+      <if test="entity.dbSchema != null and entity.dbSchema != ''">,DB_SCHEMA</if>
+      <if test="entity.dbStatus != null and entity.dbStatus != ''">,DB_STATUS</if>
+      <if test="entity.dbType != null and entity.dbType != ''">,DB_TYPE</if>
+      <if test="entity.dbUser != null and entity.dbUser != ''">,DB_USER</if>
+    </trim>
+  </sql>
+
+  <sql id="sql_insert_property_list">
+    <trim prefix="" prefixOverrides=",">
+      <if test="entity.dbAlias != null and entity.dbAlias != ''">,#{entity.dbAlias}</if>
+      <if test="entity.dbDesc != null and entity.dbDesc != ''">,#{entity.dbDesc}</if>
+      <if test="entity.dbId != null and entity.dbId != ''">,#{entity.dbId}</if>
+      <if test="entity.dbIp != null and entity.dbIp != ''">,#{entity.dbIp}</if>
+      <if test="entity.dbName != null and entity.dbName != ''">,#{entity.dbName}</if>
+      <if test="entity.dbPassword != null and entity.dbPassword != ''">,#{entity.dbPassword}</if>
+      <if test="entity.dbSchema != null and entity.dbSchema != ''">,#{entity.dbSchema}</if>
+      <if test="entity.dbStatus != null and entity.dbStatus != ''">,#{entity.dbStatus}</if>
+      <if test="entity.dbType != null and entity.dbType != ''">,#{entity.dbType}</if>
+      <if test="entity.dbUser != null and entity.dbUser != ''">,#{entity.dbUser}</if>
+    </trim>
+  </sql>
+
+  <sql id="sql_column_list">
+    DB_ALIAS
+    ,DB_DESC
+    ,DB_ID
+    ,DB_IP
+    ,DB_NAME
+    ,DB_PASSWORD
+    ,DB_SCHEMA
+    ,DB_STATUS
+    ,DB_TYPE
+    ,DB_USER
+  </sql>
+
+  <sql id="sql_update_set">
+    <trim prefix="SET" prefixOverrides=",">
+      <if test="entity != null">
+        <if test="entity.dbAlias != null and entity.dbAlias != ''">,DB_ALIAS = #{entity.dbAlias}</if>
+        <if test="entity.dbDesc != null and entity.dbDesc != ''">,DB_DESC = #{entity.dbDesc}</if>
+        <if test="entity.dbId != null and entity.dbId != ''">,DB_ID = #{entity.dbId}</if>
+        <if test="entity.dbIp != null and entity.dbIp != ''">,DB_IP = #{entity.dbIp}</if>
+        <if test="entity.dbName != null and entity.dbName != ''">,DB_NAME = #{entity.dbName}</if>
+        <if test="entity.dbPassword != null and entity.dbPassword != ''">,DB_PASSWORD = #{entity.dbPassword}</if>
+        <if test="entity.dbSchema != null and entity.dbSchema != ''">,DB_SCHEMA = #{entity.dbSchema}</if>
+        <if test="entity.dbStatus != null and entity.dbStatus != ''">,DB_STATUS = #{entity.dbStatus}</if>
+        <if test="entity.dbType != null and entity.dbType != ''">,DB_TYPE = #{entity.dbType}</if>
+        <if test="entity.dbUser != null and entity.dbUser != ''">,DB_USER = #{entity.dbUser}</if>
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="sql_force_update_set">
+    <trim prefix="SET" prefixOverrides=",">
+      <if test="_parameter.containsKey('entity_dbAlias')">,DB_ALIAS = #{entity_dbAlias, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_dbDesc')">,DB_DESC = #{entity_dbDesc, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_dbId')">,DB_ID = #{entity_dbId, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_dbIp')">,DB_IP = #{entity_dbIp, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_dbName')">,DB_NAME = #{entity_dbName, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_dbPassword')">,DB_PASSWORD = #{entity_dbPassword, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_dbSchema')">,DB_SCHEMA = #{entity_dbSchema, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_dbStatus')">,DB_STATUS = #{entity_dbStatus, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_dbType')">,DB_TYPE = #{entity_dbType, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_dbUser')">,DB_USER = #{entity_dbUser, jdbcType=VARCHAR}</if>
+    </trim>
+  </sql>
+
+  <sql id="sql_condition">
+    <if test="condition != null">
+      <if test="condition.dbAlias != null and condition.dbAlias != ''">AND DB_ALIAS = #{condition.dbAlias}</if>
+      <if test="condition.dbDesc != null and condition.dbDesc != ''">AND DB_DESC = #{condition.dbDesc}</if>
+      <if test="condition.dbId != null and condition.dbId != ''">AND DB_ID = #{condition.dbId}</if>
+      <if test="condition.dbIp != null and condition.dbIp != ''">AND DB_IP = #{condition.dbIp}</if>
+      <if test="condition.dbName != null and condition.dbName != ''">AND DB_NAME = #{condition.dbName}</if>
+      <if test="condition.dbPassword != null and condition.dbPassword != ''">AND DB_PASSWORD = #{condition.dbPassword}</if>
+      <if test="condition.dbSchema != null and condition.dbSchema != ''">AND DB_SCHEMA = #{condition.dbSchema}</if>
+      <if test="condition.dbStatus != null and condition.dbStatus != ''">AND DB_STATUS = #{condition.dbStatus}</if>
+      <if test="condition.dbType != null and condition.dbType != ''">AND DB_TYPE = #{condition.dbType}</if>
+      <if test="condition.dbUser != null and condition.dbUser != ''">AND DB_USER = #{condition.dbUser}</if>
+      <if test="!condition.expressionChainList.empty">
+        AND
+        <foreach collection="condition.expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  ${expression.column} ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  ${expression.column} ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  ${expression.column} ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  ${expression.column} ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+    </if>
+  </sql>
+
+  <sql id="sql_pagination_start">
+  <![CDATA[
+  	SELECT * FROM (
+	SELECT B.*,ROWNUMBER() OVER() AS RN FROM(
+  ]]>
+  </sql>
+
+  <sql id="sql_pagination_end">
+  <![CDATA[
+	  ) AS B
+	) AS A WHERE A.RN BETWEEN #{startRow} AND #{endRow}
+  ]]>
+  </sql>
+
+  <insert id="insert" parameterType="java.util.Map">
+    INSERT INTO ETL.t_db_info (
+      <include refid="sql_insert_column_list" />
+    ) VALUES (
+      <include refid="sql_insert_property_list" />
+    )
+  </insert>
+
+  <select id="get" parameterType="java.util.Map" resultMap="dbInfo">
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_db_info
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+  <select id="getById" parameterType="java.util.Map" resultMap="dbInfo">
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_db_info
+    WHERE db_id = #{id}
+  </select>
+
+  <select id="find" parameterType="java.util.Map" resultMap="dbInfo">
+    <if test="offset != null">
+      <include refid="sql_pagination_start" />
+    </if>
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_db_info
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+    <if test="orderBy != null">
+      ORDER BY ${orderBy}
+    </if>
+    <if test="offset != null">
+      <include refid="sql_pagination_end" />
+    </if>
+  </select>
+
+  <select id="findByIdList" parameterType="java.util.Map" resultMap="dbInfo">
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_db_info
+    WHERE db_id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+    <if test="orderBy != null">
+      ORDER BY ${orderBy}
+    </if>
+  </select>
+
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(${count_column}) AS count_ FROM ETL.t_db_info
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+  <select id="aggregate" parameterType="java.util.Map" resultType="java.util.HashMap">
+    SELECT ${aggregate_sql} FROM ETL.t_db_info
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+  <update id="update" parameterType="java.util.Map">
+    UPDATE ETL.t_db_info
+    <include refid="sql_update_set" />
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </update>
+
+  <update id="updateById" parameterType="java.util.Map">
+    UPDATE ETL.t_db_info
+    <include refid="sql_update_set" />
+    WHERE db_id = #{id}
+  </update>
+
+  <update id="updateByIdList" parameterType="java.util.Map">
+    UPDATE ETL.t_db_info
+    <include refid="sql_update_set" />
+    WHERE db_id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+  </update>
+
+  <update id="forceUpdate" parameterType="java.util.Map">
+    UPDATE ETL.t_db_info
+    <include refid="sql_force_update_set" />
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </update>
+
+  <update id="forceUpdateById" parameterType="java.util.Map">
+    UPDATE ETL.t_db_info
+    <include refid="sql_force_update_set" />
+    WHERE db_id = #{id}
+  </update>
+
+  <update id="forceUpdateByIdList" parameterType="java.util.Map">
+    UPDATE ETL.t_db_info
+    <include refid="sql_force_update_set" />
+    WHERE db_id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+  </update>
+
+  <delete id="remove" parameterType="java.util.Map">
+    DELETE FROM ETL.t_db_info
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </delete>
+
+  <delete id="removeById" parameterType="java.util.Map">
+    DELETE FROM ETL.t_db_info
+    WHERE db_id = #{id}
+  </delete>
+
+  <delete id="removeByIdList" parameterType="java.util.Map">
+    DELETE FROM ETL.t_db_info
+    WHERE db_id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+  </delete>
+</mapper>

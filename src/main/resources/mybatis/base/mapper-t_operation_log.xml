@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="operationLogDAO">
+  <resultMap id="operationLog" type="com.tlcb.bdp.model.OperationLog">
+    <result property="id" column="ID" />
+    <result property="userId" column="USER_ID" />
+    <result property="processType" column="PROCESS_TYPE" />
+    <result property="userName" column="USER_NAME" />
+    <result property="processDesc" column="PROCESS_DESC" />
+    <result property="targetTable" column="TARGET_TABLE" />
+    <result property="targetColumn" column="TARGET_COLUMN" />
+    <result property="processTime" column="PROCESS_TIME" />
+    <result property="targetDb" column="TARGET_DB" />
+    <result property="targetXls" column="TARGET_XLS" />
+  </resultMap>
+  
+   <sql id="sql_insert_column_list">
+    <trim prefix="" prefixOverrides=",">
+      <if test="entity.id != null">,ID</if>
+      <if test="entity.userId != null and entity.userId != ''">,USER_ID</if>
+      <if test="entity.processType != null and entity.processType != ''">,PROCESS_TYPE</if>
+      <if test="entity.userName != null and entity.userName != ''">,USER_NAME</if>
+      <if test="entity.processDesc != null and entity.processDesc != ''">,PROCESS_DESC</if>
+      <if test="entity.targetTable != null and entity.targetTable != ''">,TARGET_TABLE</if>
+      <if test="entity.targetColumn != null and entity.targetColumn != ''">,TARGET_COLUMN</if>
+      <if test="entity.processTime != null">,PROCESS_TIME</if>
+      <if test="entity.targetDb != null and entity.targetDb != ''">,TARGET_DB</if>
+      <if test="entity.targetXls != null and entity.targetXls != ''">,TARGET_XLS</if>
+    </trim>
+  </sql>
+  
+   <sql id="sql_insert_property_list">
+    <trim prefix="" prefixOverrides=",">
+      <if test="entity.id != null">,#{entity.id}</if>
+      <if test="entity.userId != null and entity.userId != ''">,#{entity.userId}</if>
+      <if test="entity.processType != null and entity.processType != ''">,#{entity.processType}</if>
+      <if test="entity.userName != null and entity.userName != ''">,#{entity.userName}</if>
+      <if test="entity.processDesc != null and entity.processDesc != ''">,#{entity.processDesc}</if>
+      <if test="entity.targetTable != null and entity.targetTable != ''">,#{entity.targetTable}</if>
+      <if test="entity.targetColumn != null and entity.targetColumn != ''">,#{entity.targetColumn}</if>
+      <if test="entity.processTime != null">,#{entity.processTime}</if>
+      <if test="entity.targetDb != null and entity.targetDb != ''">,#{entity.targetDb}</if>
+      <if test="entity.targetXls != null and entity.targetXls != ''">,#{entity.targetXls}</if>
+    </trim>
+  </sql>
+  
+  <sql id="sql_column_list">
+	ID
+	,PROCESS_DESC
+	,PROCESS_TIME
+	,PROCESS_TYPE
+	,TARGET_COLUMN
+	,TARGET_DB
+	,TARGET_TABLE
+	,TARGET_XLS
+	,USER_ID
+	,USER_NAME
+  </sql>
+  
+   <insert id="insert" parameterType="java.util.Map">
+    INSERT INTO ETL.t_user_process_flow (
+      <include refid="sql_insert_column_list" />
+    ) VALUES (
+      <include refid="sql_insert_property_list" />
+    )
+  </insert>
+
+  <sql id="sql_condition">
+    <if test="condition != null">
+      <if test="condition.id != null and condition.id != ''">AND ID = #{condition.id}</if>
+      <if test="condition.userId != null and condition.userId != ''">AND PROCESS_DESC = #{condition.userId}</if>
+      <if test="condition.processType != null and condition.processType != ''">AND PROCESS_TYPE = #{condition.processType}</if>
+      <if test="condition.userName != null and condition.userName != ''">AND USER_NAME = #{condition.userName}</if>
+      <if test="condition.processDesc != null and condition.processDesc != ''">AND PROCESS_DESC = #{condition.processDesc}</if>
+      <if test="condition.targetTable != null and condition.targetTable != ''">AND TARGET_TABLE = #{condition.targetTable}</if>
+      <if test="condition.targetColumn != null and condition.targetColumn != ''">AND TARGET_COLUMN = #{condition.targetColumn}</if>
+      <if test="condition.processTime != null and condition.processTime != ''">AND PROCESS_TIME = #{condition.processTime}</if>
+      <if test="condition.targetDb != null and condition.targetDb != ''">AND TARGET_DB = #{condition.targetDb}</if>
+      <if test="condition.targetXls != null and condition.targetXls != ''">AND TARGET_XLS = #{condition.targetXls}</if>
+      <if test="!condition.expressionChainList.empty">
+        AND
+        <foreach collection="condition.expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  ${expression.column} ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  ${expression.column} ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  ${expression.column} ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  ${expression.column} ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+    </if>
+  </sql>
+
+  <sql id="sql_pagination_start">
+  <![CDATA[
+  	SELECT * FROM (
+	SELECT B.*,ROWNUMBER() OVER() AS RN FROM(
+  ]]>
+  </sql>
+
+  <sql id="sql_pagination_end">
+  <![CDATA[
+	  ) AS B
+	) AS A WHERE A.RN BETWEEN #{startRow} AND #{endRow}
+  ]]>
+  </sql>
+
+  <select id="find" parameterType="java.util.Map" resultMap="operationLog">
+    <if test="offset != null">
+      <include refid="sql_pagination_start" />
+    </if>
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_user_process_flow
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+    <if test="orderBy != null">
+      ORDER BY ${orderBy}
+    </if>
+    <if test="offset != null">
+      <include refid="sql_pagination_end" />
+    </if>
+  </select>
+
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(${count_column}) AS count_ FROM ETL.t_user_process_flow
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+
+</mapper>

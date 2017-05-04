@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userTableRelationDAO">
+  <resultMap id="userTableRelation" type="com.tlcb.bdp.model.UserTableRelation">
+    <result property="relationId" column="RELATION_ID" />
+    <result property="userId" column="USER_ID" />
+    <result property="tableId" column="TABLE_ID" />
+    <result property="userName" column="USER_NAME" />
+    
+        <result property="tableName" column="TABLE_NAME" />
+    
+    <result property="status" column="STATUS" />
+  </resultMap>
+
+  <sql id="sql_insert_column_list">
+    <trim prefix="" prefixOverrides=",">
+      <if test="entity.relationId != null">,RELATION_ID</if>
+      <if test="entity.userId != null and entity.userId != ''">,USER_ID</if>
+      <if test="entity.tableId != null and entity.tableId != ''">,TABLE_ID</if>
+      <if test="entity.userName != null and entity.userName != ''">,USER_NAME</if>
+      <if test="entity.tableName != null and entity.tableName != ''">,TABLE_NAME</if>
+      
+      <if test="entity.status != null and entity.status != ''">,STATUS</if>
+    </trim>
+  </sql>
+
+  <sql id="sql_insert_property_list">
+    <trim prefix="" prefixOverrides=",">
+      <if test="entity.relationId != null">,#{entity.relationId}</if>
+      <if test="entity.userId != null and entity.userId != ''">,#{entity.userId}</if>
+      <if test="entity.tableId != null and entity.tableId != ''">,#{entity.tableId}</if>
+      <if test="entity.userName != null and entity.userName != ''">,#{entity.userName}</if>
+      <if test="entity.tableName != null and entity.tableName != ''">,#{entity.tableName}</if>
+      <if test="entity.status != null and entity.status != ''">,#{entity.status}</if>
+    </trim>
+  </sql>
+
+  <sql id="sql_column_list">
+    RELATION_ID
+    ,USER_ID
+    ,TABLE_ID
+    ,USER_NAME
+    ,TABLE_NAME
+    ,STATUS
+  </sql>
+
+  <sql id="sql_update_set">
+    <trim prefix="SET" prefixOverrides=",">
+      <if test="entity != null">
+        <if test="entity.relationId != null">,RELATION_ID = #{entity.relationId}</if>
+        <if test="entity.userId != null and entity.userId != ''">,USER_ID = #{entity.userId}</if>
+        <if test="entity.tableId != null and entity.tableId != ''">,TABLE_ID = #{entity.tableId}</if>
+        <if test="entity.userName != null and entity.userName != ''">,USER_NAME = #{entity.userName}</if>
+            <if test="entity.tableName != null and entity.tableName != ''">,TABLE_NAME = #{entity.tableName}</if>
+        <if test="entity.status != null and entity.status != ''">,STATUS = #{entity.status}</if>
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="sql_force_update_set">
+    <trim prefix="SET" prefixOverrides=",">
+      <if test="_parameter.containsKey('entity_relationId')">,RELATION_ID = #{entity_relationId, jdbcType=UnknownType[INTEGER]}</if>
+      <if test="_parameter.containsKey('entity_userId')">,USER_ID = #{entity_userId, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_tableId')">,TABLE_ID = #{entity_tableId, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_userName')">,USER_NAME = #{entity_userName, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_tableName')">,TABLE_NAME = #{entity_tableName, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_status')">,STATUS = #{entity_status, jdbcType=VARCHAR}</if>
+      
+    </trim>
+  </sql>
+
+  <sql id="sql_condition">
+    <if test="condition != null">
+      <if test="condition.relationId != null">AND RELATION_ID = #{condition.relationId}</if>
+      <if test="condition.userId != null and condition.userId != ''">AND USER_ID = #{condition.userId}</if>
+      <if test="condition.tableId != null and condition.tableId != ''">AND TABLE_ID = #{condition.tableId}</if>
+      <if test="condition.userName != null and condition.userName != ''">AND USER_NAME = #{condition.userName}</if>
+      <if test="condition.status != null and condition.status != ''">AND STATUS = #{condition.status}</if>
+     <if test="condition.tableName != null and condition.tableName != ''">AND TABLE_NAME = #{condition.tableName}</if>
+      
+      <if test="!condition.expressionChainList.empty">
+        AND
+        <foreach collection="condition.expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  ${expression.column} ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  ${expression.column} ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  ${expression.column} ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  ${expression.column} ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+    </if>
+  </sql>
+
+  <sql id="sql_pagination_start">
+  <![CDATA[
+  	SELECT * FROM (
+	SELECT B.*,ROWNUMBER() OVER() AS RN FROM(
+  ]]>
+  </sql>
+
+  <sql id="sql_pagination_end">
+  <![CDATA[
+	  ) AS B
+	) AS A WHERE A.RN BETWEEN #{startRow} AND #{endRow}
+  ]]>
+  </sql>
+
+  <insert id="insert" parameterType="java.util.Map">
+    INSERT INTO ETL.t_user_table_relation (
+      <include refid="sql_insert_column_list" />
+    ) VALUES (
+      <include refid="sql_insert_property_list" />
+    )
+  </insert>
+
+  <select id="get" parameterType="java.util.Map" resultMap="userTableRelation">
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_user_table_relation
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+  <select id="getById" parameterType="java.util.Map" resultMap="userTableRelation">
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_user_table_relation
+    WHERE relation_id = #{id}
+  </select>
+
+  <select id="find" parameterType="java.util.Map" resultMap="userTableRelation">
+    <if test="offset != null">
+      <include refid="sql_pagination_start" />
+    </if>
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_user_table_relation
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+    <if test="orderBy != null">
+      ORDER BY ${orderBy}
+    </if>
+    <if test="offset != null">
+      <include refid="sql_pagination_end" />
+    </if>
+  </select>
+
+  <select id="findByIdList" parameterType="java.util.Map" resultMap="userTableRelation">
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_user_table_relation
+    WHERE relation_id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+    <if test="orderBy != null">
+      ORDER BY ${orderBy}
+    </if>
+  </select>
+
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(${count_column}) AS count_ FROM ETL.t_user_table_relation
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+  <select id="aggregate" parameterType="java.util.Map" resultType="java.util.HashMap">
+    SELECT ${aggregate_sql} FROM ETL.t_user_table_relation
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+  <update id="update" parameterType="java.util.Map">
+    UPDATE ETL.t_user_table_relation
+    <include refid="sql_update_set" />
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </update>
+
+  <update id="updateById" parameterType="java.util.Map">
+    UPDATE ETL.t_user_table_relation
+    <include refid="sql_update_set" />
+    WHERE relation_id = #{id}
+  </update>
+
+  <update id="updateByIdList" parameterType="java.util.Map">
+    UPDATE ETL.t_user_table_relation
+    <include refid="sql_update_set" />
+    WHERE relation_id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+  </update>
+
+  <update id="forceUpdate" parameterType="java.util.Map">
+    UPDATE ETL.t_user_table_relation
+    <include refid="sql_force_update_set" />
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </update>
+
+  <update id="forceUpdateById" parameterType="java.util.Map">
+    UPDATE ETL.t_user_table_relation
+    <include refid="sql_force_update_set" />
+    WHERE relation_id = #{id}
+  </update>
+
+  <update id="forceUpdateByIdList" parameterType="java.util.Map">
+    UPDATE ETL.t_user_table_relation
+    <include refid="sql_force_update_set" />
+    WHERE relation_id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+  </update>
+
+  <delete id="remove" parameterType="java.util.Map">
+    DELETE FROM ETL.t_user_table_relation
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </delete>
+
+  <delete id="removeById" parameterType="java.util.Map">
+    DELETE FROM ETL.t_user_table_relation
+    WHERE relation_id = #{id}
+  </delete>
+
+  <delete id="removeByIdList" parameterType="java.util.Map">
+    DELETE FROM ETL.t_user_table_relation
+    WHERE relation_id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+  </delete>
+</mapper>

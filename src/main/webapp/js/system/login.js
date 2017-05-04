@@ -1,0 +1,3 @@
+function checkUserForm(){
+	$('#loginform').submit();
+}

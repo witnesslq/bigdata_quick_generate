@@ -1,0 +1,13 @@
+.sysimg{
+	width:80px;
+}
+
+.sysimghover{
+	border: 5px solid #32c5d2;
+	margin: 2px auto;
+	border-radius: 21px;
+}
+.sysul li{
+	height: 116px;
+	cursor: pointer;
+}

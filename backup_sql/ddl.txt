@@ -1,0 +1,146 @@
+--------------------------------------------------
+-- Create Table ETL.T_COLUMN_META
+--------------------------------------------------
+Create table ETL.T_COLUMN_META (
+    ID                             INTEGER             NOT NULL    
+	generated always as identity (start with 1  increment by 1  cache 20),
+    DATA_LAYER                     VARCHAR(255)                    ,
+    SRC_STM_NM                     VARCHAR(255)                    ,
+    FIELD_NM                       VARCHAR(255)                    ,
+    TBL_NM                         VARCHAR(255)                    ,
+    FIELD_CODE                     VARCHAR(255)                    ,
+    FIELD_DESC                     VARCHAR(255)                    ,
+    FLD_LENGTH                     INTEGER                         ,
+    FLD_SEQ_NUM                    INTEGER                         ,
+    DATA_TP                        VARCHAR(255)                    ,
+    JIE_BUCKET_KEY_FLAG            INTEGER                         ,
+    BUCKET_KEY_FLAG                INTEGER                         ,
+    PARTITION_KEY_FLAG             INTEGER                         ,
+    PRIMARY_KEY_FLAG               INTEGER                         ,
+    FLD_SCALE                      INTEGER                         ,
+    ROW_KEY_SEQ_NUM                INTEGER                         ,
+    IS_NULL                        VARCHAR(255)                    ,
+    IS_AMOUNT                      VARCHAR(255)                    ,
+    IS_CODE                        VARCHAR(255)                    ,
+    LST_UPDT_DT                    DATE                            ,
+    VERSION                        INTEGER                         ,
+    TB_ID                          INTEGER                         ,
+    PARTION_WAY                    VARCHAR(64)                     ,
+    IS_ENABLE                      VARCHAR(8)                    With Default 1  ) 
+    ;
+
+--------------------------------------------------
+-- Create Primary Key SQL170413171304870
+--------------------------------------------------
+alter table ETL.T_COLUMN_META 
+	add constraint SQL170413171304870 
+	Primary Key (ID);
+
+--------------------------------------------------
+-- Create Table ETL.T_DB_INFO
+--------------------------------------------------
+Create table ETL.T_DB_INFO (
+    DB_ID                          INTEGER             NOT NULL    
+	generated always as identity (start with 1  increment by 1  cache 20),
+    DB_ALIAS                       VARCHAR(50)                     ,
+    DB_DESC                        VARCHAR(50)                     ,
+    DB_IP                          VARCHAR(50)                     ,
+    DB_NAME                        VARCHAR(50)                     ,
+    DB_PASSWORD                    VARCHAR(50)                     ,
+    DB_SCHEMA                      VARCHAR(50)                     ,
+    DB_STATUS                      VARCHAR(2)                      ,
+    DB_TYPE                        VARCHAR(50)                     ,
+    DB_USER                        VARCHAR(100)                    ) 
+in USERSPACE1   ;
+
+--------------------------------------------------
+-- Create Primary Key SQL170303140005000
+--------------------------------------------------
+alter table ETL.T_DB_INFO 
+	add constraint SQL170303140005000 
+	Primary Key (DB_ID);
+
+--------------------------------------------------
+-- Create Table ETL.T_MISSION_USER_LOG
+--------------------------------------------------
+Create table ETL.T_MISSION_USER_LOG (
+    ID                             INTEGER             NOT NULL    
+	generated always as identity (start with 1  increment by 1  cache 20),
+    USER_ID                        VARCHAR(50)                     ,
+    PROCESS_TYPE                   VARCHAR(50)                     ,
+    USER_NAME                      VARCHAR(50)                     ,
+    TARGET_TABLE                   VARCHAR(50)                     ,
+    PROCESS_DESC                   VARCHAR(500)                    ,
+    PROCESS_TIME                   TIMESTAMP                       ) 
+in USERSPACE1   ;
+
+--------------------------------------------------
+-- Create Primary Key SQL170407152153010
+--------------------------------------------------
+alter table ETL.T_MISSION_USER_LOG 
+	add constraint SQL170407152153010 
+	Primary Key (ID);
+
+--------------------------------------------------
+-- Create Table ETL.T_TABLE_META
+--------------------------------------------------
+Create table ETL.T_TABLE_META (
+    ID                             INTEGER             NOT NULL    
+	generated always as identity (start with 1  increment by 1  cache 20),
+    AVG_INC_RECORD_NUM             BIGINT                          ,
+    AVG_RECORD_LENGTH              INTEGER                         ,
+    BIZ_MODULE_NM                  VARCHAR(255)                    ,
+    BUCKET_NUM                     INTEGER                         ,
+    BUCKET_TYPE                    INTEGER                         ,
+    DATA_LAYER                     VARCHAR(255)                    ,
+    LST_UPDT_DT                    DATE                            ,
+    LST_UPDT_USER                  VARCHAR(255)                    ,
+    PARTITION_TYPE                 VARCHAR(255)                    ,
+    SCHEMA_CODE                    VARCHAR(255)                    ,
+    SRC_DB_TYPE                    VARCHAR(255)                    ,
+    JIE_BUCKET_NUM                 VARCHAR(255)                    ,
+    SRC_STM_ID                     VARCHAR(255)                    ,
+    SRC_STM_NM                     VARCHAR(255)                    ,
+    TBL_CODE                       VARCHAR(255)                    ,
+    TBL_DESC                       VARCHAR(255)                    ,
+    TBL_NM                         VARCHAR(255)                    ,
+    TBL_TYPE                       VARCHAR(255)                  With Default '1'  ,
+    TB_DB_ID                       INTEGER                         ,
+    TOTAL_FLD_NUM                  INTEGER                         ,
+    TOTAL_RECORD_NUM               BIGINT                          ,
+    VERSION                        INTEGER                         ,
+    TASK_USER_ID                   VARCHAR(255)                    ,
+    TASK_USER_NAME                 VARCHAR(255)                    ,
+    TASK_USER_STATUS               VARCHAR(255)                  With Default 00  ) 
+    ;
+
+--------------------------------------------------
+-- Create Primary Key SQL170413170752620
+--------------------------------------------------
+alter table ETL.T_TABLE_META 
+	add constraint SQL170413170752620 
+	Primary Key (ID);
+
+--------------------------------------------------
+-- Create Table ETL.T_USER_PROCESS_FLOW
+--------------------------------------------------
+Create table ETL.T_USER_PROCESS_FLOW (
+    ID                             INTEGER             NOT NULL    
+	generated always as identity (start with 1  increment by 1  cache 20),
+    USER_ID                        VARCHAR(50)                     ,
+    PROCESS_TYPE                   VARCHAR(50)                     ,
+    USER_NAME                      VARCHAR(50)                     ,
+    PROCESS_DESC                   VARCHAR(500)                    ,
+    TARGET_TABLE                   VARCHAR(50)                     ,
+    TARGET_COLUMN                  VARCHAR(50)                     ,
+    PROCESS_TIME                   TIMESTAMP                       ,
+    TARGET_DB                      VARCHAR(50)                     ,
+    TARGET_XLS                     VARCHAR(100)                    ) 
+in USERSPACE1   ;
+
+--------------------------------------------------
+-- Create Primary Key SQL170329154643590
+--------------------------------------------------
+alter table ETL.T_USER_PROCESS_FLOW 
+	add constraint SQL170329154643590 
+	Primary Key (ID);

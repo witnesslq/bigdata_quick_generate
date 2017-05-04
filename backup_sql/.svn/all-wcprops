@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/TLBDP/!svn/ver/534/40%E5%AE%9E%E6%96%BD/20%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/bdpDubboProject/bdp-admin/backup_sql
+END
+ddl.txt
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/TLBDP/!svn/ver/534/40%E5%AE%9E%E6%96%BD/20%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/bdpDubboProject/bdp-admin/backup_sql/ddl.txt
+END
+output.xls
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/TLBDP/!svn/ver/534/40%E5%AE%9E%E6%96%BD/20%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/bdpDubboProject/bdp-admin/backup_sql/output.xls
+END
+t_table_meta.xls
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/TLBDP/!svn/ver/534/40%E5%AE%9E%E6%96%BD/20%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/bdpDubboProject/bdp-admin/backup_sql/t_table_meta.xls
+END
+t_db_info.xls
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/TLBDP/!svn/ver/534/40%E5%AE%9E%E6%96%BD/20%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/bdpDubboProject/bdp-admin/backup_sql/t_db_info.xls
+END
+t_mission_user_log.xls
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/TLBDP/!svn/ver/534/40%E5%AE%9E%E6%96%BD/20%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/bdpDubboProject/bdp-admin/backup_sql/t_mission_user_log.xls
+END
+t_column_meta.xls
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/TLBDP/!svn/ver/534/40%E5%AE%9E%E6%96%BD/20%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/bdpDubboProject/bdp-admin/backup_sql/t_column_meta.xls
+END
+t_user_process_flow.xls
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/TLBDP/!svn/ver/534/40%E5%AE%9E%E6%96%BD/20%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/bdpDubboProject/bdp-admin/backup_sql/t_user_process_flow.xls
+END

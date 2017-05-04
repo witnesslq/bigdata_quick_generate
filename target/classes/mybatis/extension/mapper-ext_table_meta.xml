@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tableMetaExtDAO">
+  <resultMap id="tableMeta" type="com.tlcb.bdp.vo.TableMetaVO">
+    <result property="id" column="ID" />
+     <result property="version" column="VERSION" />
+  </resultMap>
+
+	<update id = "updateVersion" parameterType = "Map">
+	
+	<![CDATA[update ETL.T_TABLE_META SET VERSION = (select max(version) from etl.t_table_meta where tbl_code in (select tbl_code from etl.t_table_meta where id = #{id}))+1 WHERE  id = #{id}]]>
+	</update>	
+</mapper>

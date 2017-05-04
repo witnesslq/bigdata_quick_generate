@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tableMetaDAO">
+  <resultMap id="tableMeta" type="com.tlcb.bdp.model.TableMeta">
+    <result property="dataLayer" column="DATA_LAYER" />
+    <result property="lstUpdtDt" column="LST_UPDT_DT" />
+    <result property="lstUpdtUser" column="LST_UPDT_USER" />
+    <result property="partitionType" column="PARTITION_TYPE" />
+    <result property="schemaCode" column="SCHEMA_CODE" />
+    <result property="srcDbType" column="SRC_DB_TYPE" />
+    <result property="jieBucketNum" column="JIE_BUCKET_NUM" />
+    <result property="srcStmId" column="SRC_STM_ID" />
+    <result property="srcStmNm" column="SRC_STM_NM" />
+    <result property="id" column="ID" />
+    <result property="avgIncRecordNum" column="AVG_INC_RECORD_NUM" />
+    <result property="avgRecordLength" column="AVG_RECORD_LENGTH" />
+    <result property="bizModuleNm" column="BIZ_MODULE_NM" />
+    <result property="bucketNum" column="BUCKET_NUM" />
+    <result property="bucketType" column="BUCKET_TYPE" />
+    <result property="tblCode" column="TBL_CODE" />
+    <result property="tblDesc" column="TBL_DESC" />
+    <result property="tblNm" column="TBL_NM" />
+    <result property="tblType" column="TBL_TYPE" />
+    <result property="tbDbId" column="TB_DB_ID" />
+    <result property="totalFldNum" column="TOTAL_FLD_NUM" />
+    <result property="totalRecordNum" column="TOTAL_RECORD_NUM" />
+    <result property="version" column="VERSION" />
+    <result property="taskUserId" column="TASK_USER_ID" />
+    <result property="taskUserName" column="TASK_USER_NAME" />
+    <result property="taskUserStatus" column="TASK_USER_STATUS" />
+  </resultMap>
+
+  <sql id="sql_insert_column_list">
+    <trim prefix="" prefixOverrides=",">
+      <if test="entity.dataLayer != null and entity.dataLayer != ''">,DATA_LAYER</if>
+      <if test="entity.lstUpdtDt != null">,LST_UPDT_DT</if>
+      <if test="entity.lstUpdtUser != null and entity.lstUpdtUser != ''">,LST_UPDT_USER</if>
+      <if test="entity.partitionType != null and entity.partitionType != ''">,PARTITION_TYPE</if>
+      <if test="entity.schemaCode != null and entity.schemaCode != ''">,SCHEMA_CODE</if>
+      <if test="entity.srcDbType != null and entity.srcDbType != ''">,SRC_DB_TYPE</if>
+      <if test="entity.jieBucketNum != null and entity.jieBucketNum != ''">,JIE_BUCKET_NUM</if>
+      <if test="entity.srcStmId != null and entity.srcStmId != ''">,SRC_STM_ID</if>
+      <if test="entity.srcStmNm != null and entity.srcStmNm != ''">,SRC_STM_NM</if>
+      <if test="entity.id != null">,ID</if>
+      <if test="entity.avgIncRecordNum != null">,AVG_INC_RECORD_NUM</if>
+      <if test="entity.avgRecordLength != null">,AVG_RECORD_LENGTH</if>
+      <if test="entity.bizModuleNm != null and entity.bizModuleNm != ''">,BIZ_MODULE_NM</if>
+      <if test="entity.bucketNum != null">,BUCKET_NUM</if>
+      <if test="entity.bucketType != null">,BUCKET_TYPE</if>
+      <if test="entity.tblCode != null and entity.tblCode != ''">,TBL_CODE</if>
+      <if test="entity.tblDesc != null and entity.tblDesc != ''">,TBL_DESC</if>
+      <if test="entity.tblNm != null and entity.tblNm != ''">,TBL_NM</if>
+      <if test="entity.tblType != null and entity.tblType != ''">,TBL_TYPE</if>
+      <if test="entity.tbDbId != null">,TB_DB_ID</if>
+      <if test="entity.totalFldNum != null">,TOTAL_FLD_NUM</if>
+      <if test="entity.totalRecordNum != null">,TOTAL_RECORD_NUM</if>
+      <if test="entity.version != null">,VERSION</if>
+      <if test="entity.taskUserId != null and entity.taskUserId != ''">,TASK_USER_ID</if>
+      <if test="entity.taskUserName != null and entity.taskUserName != ''">,TASK_USER_NAME</if>
+      <if test="entity.taskUserStatus != null and entity.taskUserStatus != ''">,TASK_USER_STATUS</if>
+    </trim>
+  </sql>
+
+  <sql id="sql_insert_property_list">
+    <trim prefix="" prefixOverrides=",">
+      <if test="entity.dataLayer != null and entity.dataLayer != ''">,#{entity.dataLayer}</if>
+      <if test="entity.lstUpdtDt != null">,#{entity.lstUpdtDt}</if>
+      <if test="entity.lstUpdtUser != null and entity.lstUpdtUser != ''">,#{entity.lstUpdtUser}</if>
+      <if test="entity.partitionType != null and entity.partitionType != ''">,#{entity.partitionType}</if>
+      <if test="entity.schemaCode != null and entity.schemaCode != ''">,#{entity.schemaCode}</if>
+      <if test="entity.srcDbType != null and entity.srcDbType != ''">,#{entity.srcDbType}</if>
+      <if test="entity.jieBucketNum != null and entity.jieBucketNum != ''">,#{entity.jieBucketNum}</if>
+      <if test="entity.srcStmId != null and entity.srcStmId != ''">,#{entity.srcStmId}</if>
+      <if test="entity.srcStmNm != null and entity.srcStmNm != ''">,#{entity.srcStmNm}</if>
+      <if test="entity.id != null">,#{entity.id}</if>
+      <if test="entity.avgIncRecordNum != null">,#{entity.avgIncRecordNum}</if>
+      <if test="entity.avgRecordLength != null">,#{entity.avgRecordLength}</if>
+      <if test="entity.bizModuleNm != null and entity.bizModuleNm != ''">,#{entity.bizModuleNm}</if>
+      <if test="entity.bucketNum != null">,#{entity.bucketNum}</if>
+      <if test="entity.bucketType != null">,#{entity.bucketType}</if>
+      <if test="entity.tblCode != null and entity.tblCode != ''">,#{entity.tblCode}</if>
+      <if test="entity.tblDesc != null and entity.tblDesc != ''">,#{entity.tblDesc}</if>
+      <if test="entity.tblNm != null and entity.tblNm != ''">,#{entity.tblNm}</if>
+      <if test="entity.tblType != null and entity.tblType != ''">,#{entity.tblType}</if>
+      <if test="entity.tbDbId != null">,#{entity.tbDbId}</if>
+      <if test="entity.totalFldNum != null">,#{entity.totalFldNum}</if>
+      <if test="entity.totalRecordNum != null">,#{entity.totalRecordNum}</if>
+      <if test="entity.version != null">,#{entity.version}</if>
+      <if test="entity.taskUserId != null and entity.taskUserId != ''">,#{entity.taskUserId}</if>
+      <if test="entity.taskUserName != null and entity.taskUserName != ''">,#{entity.taskUserName}</if>
+      <if test="entity.taskUserStatus != null and entity.taskUserStatus != ''">,#{entity.taskUserStatus}</if>
+    </trim>
+  </sql>
+
+  <sql id="sql_column_list">
+    DATA_LAYER
+    ,LST_UPDT_DT
+    ,LST_UPDT_USER
+    ,PARTITION_TYPE
+    ,SCHEMA_CODE
+    ,SRC_DB_TYPE
+    ,JIE_BUCKET_NUM
+    ,SRC_STM_ID
+    ,SRC_STM_NM
+    ,ID
+    ,AVG_INC_RECORD_NUM
+    ,AVG_RECORD_LENGTH
+    ,BIZ_MODULE_NM
+    ,BUCKET_NUM
+    ,BUCKET_TYPE
+    ,TBL_CODE
+    ,TBL_DESC
+    ,TBL_NM
+    ,TBL_TYPE
+    ,TB_DB_ID
+    ,TOTAL_FLD_NUM
+    ,TOTAL_RECORD_NUM
+    ,VERSION
+    ,TASK_USER_ID
+    ,TASK_USER_NAME
+    ,TASK_USER_STATUS
+  </sql>
+
+  <sql id="sql_update_set">
+    <trim prefix="SET" prefixOverrides=",">
+      <if test="entity != null">
+        <if test="entity.dataLayer != null and entity.dataLayer != ''">,DATA_LAYER = #{entity.dataLayer}</if>
+        <if test="entity.lstUpdtDt != null">,LST_UPDT_DT = #{entity.lstUpdtDt}</if>
+        <if test="entity.lstUpdtUser != null and entity.lstUpdtUser != ''">,LST_UPDT_USER = #{entity.lstUpdtUser}</if>
+        <if test="entity.partitionType != null and entity.partitionType != ''">,PARTITION_TYPE = #{entity.partitionType}</if>
+        <if test="entity.schemaCode != null and entity.schemaCode != ''">,SCHEMA_CODE = #{entity.schemaCode}</if>
+        <if test="entity.srcDbType != null and entity.srcDbType != ''">,SRC_DB_TYPE = #{entity.srcDbType}</if>
+        <if test="entity.jieBucketNum != null and entity.jieBucketNum != ''">,JIE_BUCKET_NUM = #{entity.jieBucketNum}</if>
+        <if test="entity.srcStmId != null and entity.srcStmId != ''">,SRC_STM_ID = #{entity.srcStmId}</if>
+        <if test="entity.srcStmNm != null and entity.srcStmNm != ''">,SRC_STM_NM = #{entity.srcStmNm}</if>
+        <if test="entity.id != null">,ID = #{entity.id}</if>
+        <if test="entity.avgIncRecordNum != null">,AVG_INC_RECORD_NUM = #{entity.avgIncRecordNum}</if>
+        <if test="entity.avgRecordLength != null">,AVG_RECORD_LENGTH = #{entity.avgRecordLength}</if>
+        <if test="entity.bizModuleNm != null and entity.bizModuleNm != ''">,BIZ_MODULE_NM = #{entity.bizModuleNm}</if>
+        <if test="entity.bucketNum != null">,BUCKET_NUM = #{entity.bucketNum}</if>
+        <if test="entity.bucketType != null">,BUCKET_TYPE = #{entity.bucketType}</if>
+        <if test="entity.tblCode != null and entity.tblCode != ''">,TBL_CODE = #{entity.tblCode}</if>
+        <if test="entity.tblDesc != null and entity.tblDesc != ''">,TBL_DESC = #{entity.tblDesc}</if>
+        <if test="entity.tblNm != null and entity.tblNm != ''">,TBL_NM = #{entity.tblNm}</if>
+        <if test="entity.tblType != null and entity.tblType != ''">,TBL_TYPE = #{entity.tblType}</if>
+        <if test="entity.tbDbId != null">,TB_DB_ID = #{entity.tbDbId}</if>
+        <if test="entity.totalFldNum != null">,TOTAL_FLD_NUM = #{entity.totalFldNum}</if>
+        <if test="entity.totalRecordNum != null">,TOTAL_RECORD_NUM = #{entity.totalRecordNum}</if>
+        <if test="entity.version != null">,VERSION = #{entity.version}</if>
+        <if test="entity.taskUserId != null and entity.taskUserId != ''">,TASK_USER_ID = #{entity.taskUserId}</if>
+        <if test="entity.taskUserName != null and entity.taskUserName != ''">,TASK_USER_NAME = #{entity.taskUserName}</if>
+        <if test="entity.taskUserStatus != null and entity.taskUserStatus != ''">,TASK_USER_STATUS = #{entity.taskUserStatus}</if>
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="sql_force_update_set">
+    <trim prefix="SET" prefixOverrides=",">
+      <if test="_parameter.containsKey('entity_dataLayer')">,DATA_LAYER = #{entity_dataLayer, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_lstUpdtDt')">,LST_UPDT_DT = #{entity_lstUpdtDt, jdbcType=DATE}</if>
+      <if test="_parameter.containsKey('entity_lstUpdtUser')">,LST_UPDT_USER = #{entity_lstUpdtUser, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_partitionType')">,PARTITION_TYPE = #{entity_partitionType, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_schemaCode')">,SCHEMA_CODE = #{entity_schemaCode, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_srcDbType')">,SRC_DB_TYPE = #{entity_srcDbType, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_jieBucketNum')">,JIE_BUCKET_NUM = #{entity_jieBucketNum, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_srcStmId')">,SRC_STM_ID = #{entity_srcStmId, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_srcStmNm')">,SRC_STM_NM = #{entity_srcStmNm, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_id')">,ID = #{entity_id, jdbcType=UnknownType[INTEGER]}</if>
+      <if test="_parameter.containsKey('entity_avgIncRecordNum')">,AVG_INC_RECORD_NUM = #{entity_avgIncRecordNum, jdbcType=BIGINT}</if>
+      <if test="_parameter.containsKey('entity_avgRecordLength')">,AVG_RECORD_LENGTH = #{entity_avgRecordLength, jdbcType=UnknownType[INTEGER]}</if>
+      <if test="_parameter.containsKey('entity_bizModuleNm')">,BIZ_MODULE_NM = #{entity_bizModuleNm, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_bucketNum')">,BUCKET_NUM = #{entity_bucketNum, jdbcType=UnknownType[INTEGER]}</if>
+      <if test="_parameter.containsKey('entity_bucketType')">,BUCKET_TYPE = #{entity_bucketType, jdbcType=UnknownType[INTEGER]}</if>
+      <if test="_parameter.containsKey('entity_tblCode')">,TBL_CODE = #{entity_tblCode, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_tblDesc')">,TBL_DESC = #{entity_tblDesc, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_tblNm')">,TBL_NM = #{entity_tblNm, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_tblType')">,TBL_TYPE = #{entity_tblType, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_tbDbId')">,TB_DB_ID = #{entity_tbDbId, jdbcType=UnknownType[INTEGER]}</if>
+      <if test="_parameter.containsKey('entity_totalFldNum')">,TOTAL_FLD_NUM = #{entity_totalFldNum, jdbcType=UnknownType[INTEGER]}</if>
+      <if test="_parameter.containsKey('entity_totalRecordNum')">,TOTAL_RECORD_NUM = #{entity_totalRecordNum, jdbcType=BIGINT}</if>
+      <if test="_parameter.containsKey('entity_version')">,VERSION = #{entity_version, jdbcType=UnknownType[INTEGER]}</if>
+      <if test="_parameter.containsKey('entity_taskUserId')">,TASK_USER_ID = #{entity_taskUserId, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_taskUserName')">,TASK_USER_NAME = #{entity_taskUserName, jdbcType=VARCHAR}</if>
+      <if test="_parameter.containsKey('entity_taskUserStatus')">,TASK_USER_STATUS = #{entity_taskUserStatus, jdbcType=VARCHAR}</if>
+    </trim>
+  </sql>
+
+  <sql id="sql_condition">
+    <if test="condition != null">
+      <if test="condition.dataLayer != null and condition.dataLayer != ''">AND DATA_LAYER = #{condition.dataLayer}</if>
+      <if test="condition.lstUpdtDt != null">AND LST_UPDT_DT = #{condition.lstUpdtDt}</if>
+      <if test="condition.lstUpdtUser != null and condition.lstUpdtUser != ''">AND LST_UPDT_USER = #{condition.lstUpdtUser}</if>
+      <if test="condition.partitionType != null and condition.partitionType != ''">AND PARTITION_TYPE = #{condition.partitionType}</if>
+      <if test="condition.schemaCode != null and condition.schemaCode != ''">AND SCHEMA_CODE = #{condition.schemaCode}</if>
+      <if test="condition.srcDbType != null and condition.srcDbType != ''">AND SRC_DB_TYPE = #{condition.srcDbType}</if>
+      <if test="condition.jieBucketNum != null and condition.jieBucketNum != ''">AND JIE_BUCKET_NUM = #{condition.jieBucketNum}</if>
+      <if test="condition.srcStmId != null and condition.srcStmId != ''">AND SRC_STM_ID = #{condition.srcStmId}</if>
+      <if test="condition.srcStmNm != null and condition.srcStmNm != ''">AND SRC_STM_NM = #{condition.srcStmNm}</if>
+      <if test="condition.id != null">AND ID = #{condition.id}</if>
+      <if test="condition.avgIncRecordNum != null">AND AVG_INC_RECORD_NUM = #{condition.avgIncRecordNum}</if>
+      <if test="condition.avgRecordLength != null">AND AVG_RECORD_LENGTH = #{condition.avgRecordLength}</if>
+      <if test="condition.bizModuleNm != null and condition.bizModuleNm != ''">AND BIZ_MODULE_NM = #{condition.bizModuleNm}</if>
+      <if test="condition.bucketNum != null">AND BUCKET_NUM = #{condition.bucketNum}</if>
+      <if test="condition.bucketType != null">AND BUCKET_TYPE = #{condition.bucketType}</if>
+      <if test="condition.tblCode != null and condition.tblCode != ''">AND TBL_CODE = #{condition.tblCode}</if>
+      <if test="condition.tblDesc != null and condition.tblDesc != ''">AND TBL_DESC = #{condition.tblDesc}</if>
+      <if test="condition.tblNm != null and condition.tblNm != ''">AND TBL_NM = #{condition.tblNm}</if>
+      <if test="condition.tblType != null and condition.tblType != ''">AND TBL_TYPE = #{condition.tblType}</if>
+      <if test="condition.tbDbId != null">AND TB_DB_ID = #{condition.tbDbId}</if>
+      <if test="condition.totalFldNum != null">AND TOTAL_FLD_NUM = #{condition.totalFldNum}</if>
+      <if test="condition.totalRecordNum != null">AND TOTAL_RECORD_NUM = #{condition.totalRecordNum}</if>
+      <if test="condition.version != null">AND VERSION = #{condition.version}</if>
+      <if test="condition.taskUserId != null and condition.taskUserId != ''">AND TASK_USER_ID = #{condition.taskUserId}</if>
+      <if test="condition.taskUserName != null and condition.taskUserName != ''">AND TASK_USER_NAME = #{condition.taskUserName}</if>
+      <if test="condition.taskUserStatus != null and condition.taskUserStatus != ''">AND TASK_USER_STATUS = #{condition.taskUserStatus}</if>
+      <if test="!condition.expressionChainList.empty">
+        AND
+        <foreach collection="condition.expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  ${expression.column} ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  ${expression.column} ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  ${expression.column} ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  ${expression.column} ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+    </if>
+  </sql>
+
+  <sql id="sql_pagination_start">
+  <![CDATA[
+  	SELECT * FROM (
+	SELECT B.*,ROWNUMBER() OVER() AS RN FROM(
+  ]]>
+  </sql>
+
+  <sql id="sql_pagination_end">
+  <![CDATA[
+	  ) AS B
+	) AS A WHERE A.RN BETWEEN #{startRow} AND #{endRow}
+  ]]>
+  </sql>
+
+  <insert id="insert" parameterType="java.util.Map">
+    INSERT INTO ETL.t_table_meta (
+      <include refid="sql_insert_column_list" />
+    ) VALUES (
+      <include refid="sql_insert_property_list" />
+    )
+  </insert>
+
+  <select id="get" parameterType="java.util.Map" resultMap="tableMeta">
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_table_meta
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+  <select id="getById" parameterType="java.util.Map" resultMap="tableMeta">
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_table_meta
+    WHERE id = #{id}
+  </select>
+
+  <select id="find" parameterType="java.util.Map" resultMap="tableMeta">
+    <if test="offset != null">
+      <include refid="sql_pagination_start" />
+    </if>
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_table_meta
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+    <if test="orderBy != null">
+      ORDER BY ${orderBy}
+    </if>
+    <if test="offset != null">
+      <include refid="sql_pagination_end" />
+    </if>
+  </select>
+
+  <select id="findByIdList" parameterType="java.util.Map" resultMap="tableMeta">
+    SELECT
+      <include refid="sql_column_list" />
+    FROM ETL.t_table_meta
+    WHERE id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+    <if test="orderBy != null">
+      ORDER BY ${orderBy}
+    </if>
+  </select>
+
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(${count_column}) AS count_ FROM ETL.t_table_meta
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+  <select id="aggregate" parameterType="java.util.Map" resultType="java.util.HashMap">
+    SELECT ${aggregate_sql} FROM ETL.t_table_meta
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+
+  <update id="update" parameterType="java.util.Map">
+    UPDATE ETL.t_table_meta
+    <include refid="sql_update_set" />
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </update>
+
+  <update id="updateById" parameterType="java.util.Map">
+    UPDATE ETL.t_table_meta
+    <include refid="sql_update_set" />
+    WHERE id = #{id}
+  </update>
+
+  <update id="updateByIdList" parameterType="java.util.Map">
+    UPDATE ETL.t_table_meta
+    <include refid="sql_update_set" />
+    WHERE id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+  </update>
+
+  <update id="forceUpdate" parameterType="java.util.Map">
+    UPDATE ETL.t_table_meta
+    <include refid="sql_force_update_set" />
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </update>
+
+  <update id="forceUpdateById" parameterType="java.util.Map">
+    UPDATE ETL.t_table_meta
+    <include refid="sql_force_update_set" />
+    WHERE id = #{id}
+  </update>
+
+  <update id="forceUpdateByIdList" parameterType="java.util.Map">
+    UPDATE ETL.t_table_meta
+    <include refid="sql_force_update_set" />
+    WHERE id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+  </update>
+
+  <delete id="remove" parameterType="java.util.Map">
+    DELETE FROM ETL.t_table_meta
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <include refid="sql_condition" />
+    </trim>
+  </delete>
+
+  <delete id="removeById" parameterType="java.util.Map">
+    DELETE FROM ETL.t_table_meta
+    WHERE id = #{id}
+  </delete>
+
+  <delete id="removeByIdList" parameterType="java.util.Map">
+    DELETE FROM ETL.t_table_meta
+    WHERE id IN
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <include refid="sql_condition" />
+  </delete>
+</mapper>
